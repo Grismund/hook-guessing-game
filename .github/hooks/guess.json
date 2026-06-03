@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "bash .agents/hooks/guess-hook.sh",
+        "powershell": "pwsh -NoProfile -File .agents/hooks/guess-hook.ps1",
+        "cwd": ".",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}
