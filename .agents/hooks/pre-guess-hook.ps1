@@ -14,11 +14,17 @@ try {
     }
 
     $repoRoot     = (Resolve-Path (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "..\..")).Path
-    $solutionFile = Join-Path $repoRoot "SOLUTION.md"
+    $outputsDir   = Join-Path $repoRoot "outputs"
+    $solutionFile = Join-Path $outputsDir "SOLUTION.md"
+    $guessFile    = Join-Path $outputsDir "GUESS.md"
 
     if (-not (Test-Path $solutionFile)) {
         $secret = Get-Random -Minimum 1 -Maximum 101
         Set-Content -Path $solutionFile -Value "$secret" -NoNewline
+    }
+
+    if (-not (Test-Path $guessFile)) {
+        Set-Content -Path $guessFile -Value "" -NoNewline
     }
 } catch {
     # Fail-closed: always exit 0 to avoid blocking the tool call

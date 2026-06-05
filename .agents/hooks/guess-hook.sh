@@ -1,17 +1,20 @@
 #!/usr/bin/env bash
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-SOLUTION_FILE="$REPO_ROOT/SOLUTION.md"
+OUTPUTS_DIR="$REPO_ROOT/outputs"
+SOLUTION_FILE="$OUTPUTS_DIR/SOLUTION.md"
+GUESS_FILE="$OUTPUTS_DIR/GUESS.md"
 
 # No active game — skip silently
 [ ! -f "$SOLUTION_FILE" ] && exit 0
 
-GUESS=$(cat "$REPO_ROOT/GUESS.md" 2>/dev/null || true)
+GUESS=$(cat "$GUESS_FILE" 2>/dev/null || true)
 SECRET=$(cat "$SOLUTION_FILE")
 
 [ -z "$GUESS" ] && exit 0
 
 if (( GUESS == SECRET )); then
   rm -f "$SOLUTION_FILE"
+  rm -f "$GUESS_FILE"
   echo "{\"additionalContext\": \"CORRECT! The number was $SECRET.\"}"
   exit 0
 elif (( GUESS > SECRET )); then
