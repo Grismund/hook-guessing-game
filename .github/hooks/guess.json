@@ -1,6 +1,15 @@
 {
   "version": 1,
   "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "bash .agents/hooks/pre-guess-hook.sh",
+        "powershell": "pwsh -NoProfile -File .agents/hooks/pre-guess-hook.ps1",
+        "cwd": ".",
+        "timeoutSec": 10
+      }
+    ],
     "postToolUse": [
       {
         "type": "command",
