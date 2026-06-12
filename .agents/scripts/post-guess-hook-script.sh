@@ -8,16 +8,16 @@ GUESS_FILE="$OUTPUTS_DIR/GUESS.md"
 [ ! -f "$SOLUTION_FILE" ] && exit 0
 
 GUESS=$(cat "$GUESS_FILE" 2>/dev/null || true)
-SECRET=$(cat "$SOLUTION_FILE")
+SOLUTION=$(cat "$SOLUTION_FILE")
 
 [ -z "$GUESS" ] && exit 0
 
-if (( GUESS == SECRET )); then
+if (( GUESS == SOLUTION )); then
   rm -f "$SOLUTION_FILE"
   rm -f "$GUESS_FILE"
-  echo "{\"additionalContext\": \"CORRECT! The number was $SECRET.\"}"
+  echo "{\"additionalContext\": \"CORRECT! The number was $SOLUTION.\"}"
   exit 0
-elif (( GUESS > SECRET )); then
+elif (( GUESS > SOLUTION )); then
   echo '{"additionalContext": "LOWER"}'
   exit 0
 else

@@ -17,8 +17,8 @@ SOLUTION_FILE="$OUTPUTS_DIR/SOLUTION.md"
 GUESS_FILE="$OUTPUTS_DIR/GUESS.md"
 
 if [ ! -f "$SOLUTION_FILE" ]; then
-    secret=$(( RANDOM % 100 + 1 ))
-    printf '%s' "$secret" > "$SOLUTION_FILE"
+    solution=$(( RANDOM % 100 + 1 ))
+    printf '%s' "$solution" > "$SOLUTION_FILE"
 fi
 
 if [ ! -f "$GUESS_FILE" ]; then

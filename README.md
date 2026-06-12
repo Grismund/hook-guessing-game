@@ -1,6 +1,6 @@
 # Guess-the-Number: A Copilot CLI Hooks Demo
 
-A minimal example of **preToolUse** and **postToolUse** hooks. The agent plays a binary-search guessing game — hooks intercept every write to `GUESS.md` and feed back `HIGHER`, `LOWER`, or `CORRECT` via `additionalContext`, without the agent ever seeing the secret.
+A minimal example of **preToolUse** and **postToolUse** hooks. The agent plays a binary-search guessing game — hooks intercept every write to `GUESS.md` and feed back `HIGHER`, `LOWER`, or `CORRECT` via `additionalContext`, without the agent ever seeing the solution.
 
 ---
 
@@ -20,15 +20,15 @@ Place a `.json` file in `.github/hooks/`. Copilot CLI loads all files there auto
                  ▼
   ┌─────────────────────────────┐   stdin: { toolName, toolArgs }
   │  preToolUse hook            │
-  │  pre-guess-hook.ps1/.sh     │   If GUESS.md in args and no SOLUTION.md:
-  │                             │   → generate secret, write SOLUTION.md
+  │  pre-guess-hook-script.ps1/.sh │   If GUESS.md in args and no SOLUTION.md:
+  │                             │   → generate solution, write SOLUTION.md
   └──────────────┬──────────────┘   stdout: (nothing)
                  │
                  ▼ tool executes — GUESS.md written
                  │
   ┌─────────────────────────────┐   stdin: { toolName, toolArgs, toolResult }
   │  postToolUse hook           │
-  │  guess-hook.ps1/.sh         │   Read GUESS.md vs SOLUTION.md:
+  │  post-guess-hook-script.ps1/.sh │   Read GUESS.md vs SOLUTION.md:
   │                             │   → HIGHER / LOWER / CORRECT (+ cleanup)
   └──────────────┬──────────────┘   stdout: {"additionalContext": "HIGHER"}
                  │
@@ -49,8 +49,8 @@ dlp-week-5/
 │   └── guess.json                ← hook config (auto-loaded)
 ├── .agents/
 │   ├── scripts/
-│   │   ├── pre-guess-hook.{ps1,sh}   ← preToolUse: lazy game init
-│   │   └── guess-hook.{ps1,sh}       ← postToolUse: judge guess, emit verdict
+│   │   ├── pre-guess-hook-script.{ps1,sh}   ← preToolUse: lazy game init
+│   │   └── post-guess-hook-script.{ps1,sh}  ← postToolUse: judge guess, emit verdict
 │   └── skills/guess-number/
 │       └── SKILL.md              ← tells the agent to write guesses to GUESS.md
 └── outputs/

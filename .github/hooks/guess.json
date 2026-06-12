@@ -4,8 +4,8 @@
     "preToolUse": [
       {
         "type": "command",
-        "bash": "bash .agents/scripts/pre-guess-hook.sh",
-        "powershell": "pwsh -NoProfile -File .agents/scripts/pre-guess-hook.ps1",
+        "bash": "bash .agents/scripts/pre-guess-hook-script.sh",
+        "powershell": "pwsh -NoProfile -File .agents/scripts/pre-guess-hook-script.ps1",
         "cwd": ".",
         "timeoutSec": 10
       }
@@ -13,8 +13,8 @@
     "postToolUse": [
       {
         "type": "command",
-        "bash": "bash .agents/scripts/guess-hook.sh",
-        "powershell": "pwsh -NoProfile -File .agents/scripts/guess-hook.ps1",
+        "bash": "bash .agents/scripts/post-guess-hook-script.sh",
+        "powershell": "pwsh -NoProfile -File .agents/scripts/post-guess-hook-script.ps1",
         "cwd": ".",
         "timeoutSec": 10
       }

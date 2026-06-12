@@ -19,8 +19,8 @@ try {
     $guessFile    = Join-Path $outputsDir "GUESS.md"
 
     if (-not (Test-Path $solutionFile)) {
-        $secret = Get-Random -Minimum 1 -Maximum 101
-        Set-Content -Path $solutionFile -Value "$secret" -NoNewline
+        $solution = Get-Random -Minimum 1 -Maximum 101
+        Set-Content -Path $solutionFile -Value "$solution" -NoNewline
     }
 
     if (-not (Test-Path $guessFile)) {
