@@ -1,3 +1,6 @@
+ $logFile = Join-Path (Resolve-Path (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "..\..")).Path "outputs\hook-log.txt"
+ Add-Content -Path $logFile -Value "$(Get-Date -Format 'yyyy-MM-ddTHH:mm:ss') $($MyInvocation.MyCommand.Name) invoked"
+
 try {
     $raw = [Console]::In.ReadToEnd()
     $payload = $raw | ConvertFrom-Json -ErrorAction Stop

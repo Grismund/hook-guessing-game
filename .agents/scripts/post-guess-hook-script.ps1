@@ -1,3 +1,6 @@
+$logFile = Join-Path (Resolve-Path (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "..\..")).Path "outputs\hook-log.txt"
+ Add-Content -Path $logFile -Value "$(Get-Date -Format 'yyyy-MM-ddTHH:mm:ss') $($MyInvocation.MyCommand.Name) invoked"
+
 $repoRoot     = (Resolve-Path (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "..\..")).Path
 $outputsDir   = Join-Path $repoRoot "outputs"
 $solutionFile = Join-Path $outputsDir "SOLUTION.md"
@@ -19,9 +22,9 @@ if ([int]$guess -eq [int]$solution) {
     "{`"additionalContext`": `"CORRECT! The number was $solution.`"}"
     exit 0
 } elseif ([int]$guess -gt [int]$solution) {
-    "{`"additionalContext`": `"LOWER - Guess again!`"}"
+    "{`"additionalContext`": `"Your guess was too high. Guess lower!`"}"
     exit 0
 } else {
-    "{`"additionalContext`": `"HIGHER - Guess again!`"}"
+    "{`"additionalContext`": `"Your guess was too low. Guess higher!`"}"
     exit 0
 }

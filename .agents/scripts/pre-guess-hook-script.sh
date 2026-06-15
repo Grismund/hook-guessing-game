@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+ LOG_FILE="$(cd "$(dirname "$0")/../.." && pwd)/outputs/hook-log.txt"
+ echo "$(date +"%Y-%m-%dT%H:%M:%S") $(basename "$0") invoked" >> "$LOG_FILE"
+
 raw=$(cat 2>/dev/null || true)
 
 if [ -z "$raw" ]; then

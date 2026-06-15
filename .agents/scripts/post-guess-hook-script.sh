@@ -4,6 +4,9 @@ OUTPUTS_DIR="$REPO_ROOT/outputs"
 SOLUTION_FILE="$OUTPUTS_DIR/SOLUTION.md"
 GUESS_FILE="$OUTPUTS_DIR/GUESS.md"
 
+LOG_FILE="$REPO_ROOT/outputs/hook-log.txt"
+ echo "$(date +"%Y-%m-%dT%H:%M:%S") $(basename "$0") invoked" >> "$LOG_FILE"
+
 # No active game — skip silently
 [ ! -f "$SOLUTION_FILE" ] && exit 0
 
@@ -18,9 +21,9 @@ if (( GUESS == SOLUTION )); then
   echo "{\"additionalContext\": \"CORRECT! The number was $SOLUTION.\"}"
   exit 0
 elif (( GUESS > SOLUTION )); then
-  echo '{"additionalContext": "LOWER"}'
+  echo '{"additionalContext": "Your guess was too high. Guess lower!"}'
   exit 0
 else
-  echo '{"additionalContext": "HIGHER"}'
+  echo '{"additionalContext": "Your guess was too low. Guess higher!"}'
   exit 0
 fi
